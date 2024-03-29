@@ -1,5 +1,5 @@
 # TropiCycloneNet
-The code of "MGTCF: Multi-Generator Tropical Cyclone Forecasting with Heterogeneous Meteorological Data" accepted by AAAI2023.
+This project includes a subset of our global TC track and intensity prediction dataset [TCN_D](https://drive.google.com/file/d/1AZhiGk-cTvcMdL9jerL25KmTzqD8Kab-/view?usp=sharing) and the test code of our deep learning TC forecasting method TCN_M.
 
 This [paper](https://ojs.aaai.org/index.php/AAAI/article/view/25638) has been published.
 
