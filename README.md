@@ -16,7 +16,7 @@ To show our work intuitively, we provide this code to visualize our track predic
 ## Data Preparation
 First, we need to download all the data we used in TropiCycloneNet.
 * $TCN_{D}$'s [subset](https://drive.google.com/file/d/1YJg_gjF-zqvRdNpmAWFG4bG0Akwv_r2p/view?usp=sharing)
-* Himawari-8 satellite [cloud image](https://drive.google.com/file/d/181gnyDV0lNTQGIb5YkI1Rm0xatMU7hJD/view?usp=sharing)
+* Himawari-8 satellite [cloud image](https://drive.google.com/file/d/1WcsNxrknd6msvMkt0PGfW7TJJylWo6qE/view?usp=sharing)
 * $TCN_{M}$'s [checkpoint](https://drive.google.com/file/d/1j5r2L5Y5W81pn7nBfrZCT1BA1_qfnaay/view?usp=sharing)
 
 After completing the downloading, there are some files.
