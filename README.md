@@ -14,7 +14,7 @@ To show our work intuitively, we provide this code to visualize our track predic
 * Pytorch 1.11.0
 
 ## Data Preparation
-First, we need to download all the data that we used in TropiCycloneNet.
+First, we need to download all the data we used in TropiCycloneNet.
 * $TCN_{D}$'s [subset]()
 * Himawari-8 satellite [cloud image](https://drive.google.com/file/d/181gnyDV0lNTQGIb5YkI1Rm0xatMU7hJD/view?usp=sharing)
 * $TCN_{M}$'s [checkpoint](https://drive.google.com/file/d/1j5r2L5Y5W81pn7nBfrZCT1BA1_qfnaay/view?usp=sharing)
@@ -24,7 +24,7 @@ As for $TCN_{D}$'s subset, it includes BST data ($Data_{1d}$), ERA5 data($Data_{
 
 As for the Himawari-8 satellite cloud image, it will be used as the background of our track prediction results.
 
-As $TCN_{M}$'s checkpoint, it is our well-trained model, you need to move it to **\scripts\model_save\best** before you run our code.
+As for $TCN_{M}$'s checkpoint, it is our well-trained model, you need to move it to **\scripts\model_save\best** before you run our code.
 
 ## Test
 ```python
