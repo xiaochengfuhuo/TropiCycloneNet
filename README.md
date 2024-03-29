@@ -12,7 +12,6 @@ To show our work intuitively, we provide this code to visualize our track predic
 ## Requirements 
 * python 3.8.5
 * Pytorch 1.11.0
-* CUDA 11.7
 
 ## Data Preparation
 First, we need to download all the data that we used in TropiCycloneNet.
