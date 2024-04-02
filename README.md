@@ -6,7 +6,7 @@ The training code will come soon.
 ## Introduction
 
 To show our work intuitively, we provide this code to visualize our track prediction results on the Himawari-8 satellite cloud image. (Our method can also provide the TC intensity predictions. But there is not a very suitable way to show them so this code only shows the track prediction results)
-![Sample](LINGLING.gif)
+![Sample](LINGLING.gif "Image Title")
 
 
 ## Requirements 
