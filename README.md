@@ -11,7 +11,7 @@ In the above picture, the sequence of red circles depicts the actual trajectory,
 
 ## Requirements 
 * python 3.8.5
-* Pytorch 1.11.0
+* Pytorch 1.11.0 (GPU)
 
 ## Data Preparation
 First, we need to download all the data we used in TropiCycloneNet.
