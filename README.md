@@ -20,7 +20,7 @@ First, we need to download all the data we used in TropiCycloneNet.
 * $TCN_{M}$'s [checkpoint](https://drive.google.com/file/d/1j5r2L5Y5W81pn7nBfrZCT1BA1_qfnaay/view?usp=sharing)
 
 After completing the downloading, there are some files.
-As for $TCN_{D}$'s subset, it includes BST data ($Data_{1d}$), ERA5 data($Data_{2d}$), and Environment data($Env-data$). You can extract them somewhere you like.
+As for $TCN_{D}$'s subset, it includes BST data ($Data_{1d}$), a part of ERA5 data($Data_{2d}$, GPH 500 hPa), and Environment data($Env-data$). You can extract them somewhere you like.
 
 As for the Himawari-8 satellite cloud image, it will be used as the background of our track prediction results.
 
