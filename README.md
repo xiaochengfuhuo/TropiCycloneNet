@@ -35,3 +35,19 @@ python visual_evaluate_model_Me.py --TC_name MALIKSI --TC_date 2018061006  --TC_
 **TC_name** and **TC_date** are the parameters presenting the TC you want to predict. You can change it and see some other predictions. Please check the TC in the folder **Himawari_airmass** and choose the TC to predict (at this moment, we just provided cloud images in the year 2018 and 2019).
 
 After running the code (about 1 min), you can check the results at **\scripts\plot**
+
+## Citing TropiCycloneNet
+
+```
+@article{TropiCycloneNet_under_review,
+author = {Huang, Cheng and Mu, Pan and Zhang, Jinglin and Chan, Sixian and Zhang Shiqi and Yan, Hanting and Chen, Shengyong and Bai, Cong},
+title = {TropiCycloneNet: A Benchmark Dataset and A Deep Learning Method for Global Tropical Cyclone Forecasting},
+journal = {Nature Communications},
+volume = {under_review},
+number = {under_review},
+pages = {under_review},
+doi = {under_review},
+url = {under_review},
+year = {under_review}
+}
+```
