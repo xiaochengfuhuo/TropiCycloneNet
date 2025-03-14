@@ -22,20 +22,26 @@ import numpy as np
 
 os.environ["CUDA_VISIBLE_DEVICES"] = '0'
 # areas = ['EP','NA','NI','SI','SP','WP']
-areas = ['WP']
+# Define the target area for analysis
+areas = ['WP'] # Western Pacific (WP)
 pt_num = '16000'
 save_ana = False
+
+# Define command-line argument parser
 parser = argparse.ArgumentParser()
-parser.add_argument('--model_path',default='model_save/best', type=str)
-parser.add_argument('--num_samples', default=6, type=int)
-parser.add_argument('--dset_type', default='test', type=str)
-parser.add_argument('--areas', default=areas, type=str)
-parser.add_argument('--TC_name', default='MALIKSI', type=str)
-parser.add_argument('--TC_date', default='2018061006', type=str)
-parser.add_argument('--TC_img_path', default='G:/data/TYDataset/TY-Airmass', type=str)
-parser.add_argument('--TC_data_path', default='G:/data/data4Tropicyclone/visualization_data', type=str)
+parser.add_argument('--model_path',default='model_save/best', type=str,help="Path to the trained model")
+parser.add_argument('--num_samples', default=6, type=int, help="Number of samples to generate")
+parser.add_argument('--dset_type', default='test', type=str, help="Dataset type (train/val/test)")
+parser.add_argument('--areas', default=areas, type=str, help="Regions for analysis")
+parser.add_argument('--TC_name', default='MALIKSI', type=str, help="Tropical cyclone name")
+parser.add_argument('--TC_date', default='2018061006', type=str, help="Tropical cyclone timestamp (YYYYMMDDHH)")
+parser.add_argument('--TC_img_path', default='G:/data/TYDataset/TY-Airmass', type=str, help="Path to satellite images")
+parser.add_argument('--TC_data_path', default='G:/data/data4Tropicyclone/visualization_data', type=str, help="Path to cyclone trajectory data")
 
 def get_generator(checkpoint):
+    '''
+    Load the trained model from a checkpoint and return the generator model.
+    '''
     args = AttrDict(checkpoint['args'])
     generator = TrajectoryGenerator(
         obs_len=args.obs_len,
@@ -63,6 +69,9 @@ def get_generator(checkpoint):
 
 
 def getPicName(tyid,args):
+    '''
+    Retrieve the corresponding satellite image file path for the given tropical cyclone
+    '''
     try:
         tyname = tyid[0]['new'][1]
         date = tyid[0]['new'][0]
@@ -78,6 +87,7 @@ def getPicName(tyid,args):
         return 0
 
 def getclosetra(i,gt,pre):
+
     pres = np.stack(pre)
     pres = pres[:,:,i,:]
     x = pres[:,:,0]-gt[:,0]
@@ -90,17 +100,20 @@ def getclosetra(i,gt,pre):
 
 
 def encircle(x,y, ax=None, **kw):
-    if not ax: ax=plt.gca() #获取当前子图，如果当前子图不存在，那就创建新的子图(get current ax)
-    p = np.c_[x,y] #.c_功能类似于zip，不过不是生成组合的元祖，而是生成拼接起来的数组array
-    hull = ConvexHull(p) #将数据集输入到ConvexHull中，自动生成凸包类型的对象
+    '''
+    Draw a convex hull around the given points on the plot.
+    '''
+    if not ax: ax=plt.gca()
+    p = np.c_[x,y]
+    hull = ConvexHull(p)
     poly = plt.Polygon(p[hull.vertices,:], **kw)
-        #使用属性vertices调用形成凸包的点的索引，进行切片后，利用绘制多边形的类plt.Polygon将形成凸包的点连起来
-        #这里的**kw就是定义函数的时候输入的**kw，里面包含了一系列可以在绘制多边形的类中进行调节的内容
-        #包括多边形的边框颜色，填充颜色，透明度等等
-    ax.add_patch(poly) #使用add_patch，将生成的多边形作为一个补丁补充到图像上
+    ax.add_patch(poly)
 
 
 def evaluate(args, loader, generator, num_samples,sava_path,plot_all=False,tc_name='MALIKSI',tc_date='2018061006'):
+    '''
+    Perform evaluation and visualization of the predicted cyclone trajectories.
+    '''
     ade_outer, fde_outer,tde_outer,ve_outer,ana_outer,pv_outer,gt = [], [],[],[],[],[],[]
     total_traj = 0
     generator.eval()
@@ -227,6 +240,9 @@ def evaluate(args, loader, generator, num_samples,sava_path,plot_all=False,tc_na
 
 
 def main(args):
+    '''
+    Main function to load model and dataset, and run evaluation.
+    '''
     sava_path = args.model_path
     areas_str = ''
 
@@ -259,7 +275,7 @@ def main(args):
 
 
 def seed_torch():
-    seed = 1024 # 用户设定
+    seed = 1024 
     os.environ["PYTHONHASHSEED"] = str(seed)
     np.random.seed(seed)
     torch.manual_seed(seed)

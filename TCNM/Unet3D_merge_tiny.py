@@ -6,25 +6,27 @@ import numpy as np
 # from torch.nn import Conv3d, ConvTranspose3d, BatchNorm3d, MaxPool3d, AvgPool1d, Dropout3d
 # from torch.nn import ReLU, Sigmoid
 '''
-Conv3d的输入是(batch size, channel, sequence, height, width)
+the shape of Conv3d input is (batch size, channel, sequence, height, width)
 '''
 
 class Conv3d(nn.Module):
     def __init__(self, in_channel, out_channel, kernel_size, stride, padding):
         super(Conv3d, self).__init__()
 
+        # First convolutional layer with BatchNorm and ReLU activation
         self.conv1 = nn.Sequential(
             nn.Conv3d(in_channel, out_channel, kernel_size=kernel_size, stride=stride, padding=padding, bias=True),
             nn.BatchNorm3d(out_channel),
             nn.ReLU(inplace=True),
         )
 
+        # Second convolutional layer with BatchNorm and ReLU activation
         self.conv2 = nn.Sequential(
             nn.Conv3d(out_channel, out_channel, kernel_size=kernel_size, stride=stride, padding=padding, bias=True),
             nn.BatchNorm3d(out_channel),
             nn.ReLU(True),
         )
-
+        # Residual connection to maintain gradient flow
         self.residual = nn.Conv3d(in_channel, out_channel, kernel_size=1, stride=1, padding=0, bias=False)
 
 
@@ -34,6 +36,7 @@ class Conv3d(nn.Module):
 class Down(nn.Module):
     def __init__(self, in_channel, out_channel, kernel_size, stride):
         super(Down, self).__init__()
+        # Down-sampling block using max pooling followed by Conv3d block
         self.maxpool_conv = nn.Sequential(
             nn.MaxPool3d(kernel_size=kernel_size, stride=stride),
             Conv3d(in_channel, out_channel, kernel_size=3, stride=1, padding=1)
@@ -41,23 +44,24 @@ class Down(nn.Module):
 
     def forward(self, x):
         return self.maxpool_conv(x)
-'''
-x1是尺寸小的
-x2是尺寸大的
-'''
+
 class Up(nn.Module):
     def __init__(self, x1_in, x2_in, out_channel, kernel_size, stride, padding):
         super(Up, self).__init__()
+
+        # Up-sampling using transposed convolution followed by Conv3d block
         self.up = nn.Sequential(
             nn.ConvTranspose3d(x1_in, x1_in, kernel_size=kernel_size, stride=stride, padding=padding, bias=True),
             nn.ReLU()
         )
 
+        # Feature fusion using convolutional layers
         self.conv = Conv3d(x1_in + x2_in, out_channel, kernel_size=3, stride=1, padding=1)
 
     def forward(self, x1, x2):
         x1 = self.up(x1)
 
+        # Adjust shape for concatenation
         diffC = x2.size()[2] - x1.size()[2]
         diffY = x2.size()[3] - x1.size()[3]
         diffX = x2.size()[4] - x1.size()[4]
@@ -70,6 +74,7 @@ class OutConv(nn.Module):
     def __init__(self, in_channel_list, out_channel, kernel_size, stride, padding):
         super(OutConv, self).__init__()
 
+        # Compute the total input channels after up-sampling
         channel_sum = np.sum(np.array(in_channel_list))
         self.up_list = []
         for i,channel in enumerate(in_channel_list):
@@ -87,7 +92,7 @@ class OutConv(nn.Module):
             )
         self.up_list = nn.ModuleList(self.up_list)
 
-
+        # Final convolutional layer to produce output
         self.conv = nn.Sequential(
             nn.Conv3d(in_channel_list[-1], out_channel, kernel_size=kernel_size, stride=stride, padding=padding),
             nn.BatchNorm3d(out_channel),
@@ -108,6 +113,7 @@ class Unet3D(nn.Module):
     def __init__(self, in_channel, out_channel):
         super(Unet3D, self).__init__()
 
+        # 3D U-Net architecture with encoder and decoder blocks
         self.inc = Conv3d(in_channel, 16, kernel_size=3, stride=1, padding=1)
         self.down1 = Down(16, 32, kernel_size=[1, 2, 2], stride=[1, 2, 2])
         self.down2 = Down(32, 64, kernel_size=[1, 2, 2], stride=[1, 2, 2])
@@ -126,6 +132,7 @@ class Unet3D(nn.Module):
         # self.x52fusion = nn.Linear(128 * 2 * 4 * 8, 64)
 
     def forward(self, x):
+        # Forward pass through encoder and decoder
         batch, _, _, _, _ = x.shape
         x1 = self.inc(x)  # [4, 64, 5, 100, 100]
         # output = self.h2input(output)
