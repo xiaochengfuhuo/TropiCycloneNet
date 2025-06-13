@@ -1,4 +1,4 @@
-# TropiCycloneNet
+![图片](https://github.com/user-attachments/assets/792867ad-5ea4-49c8-beb9-267276de7aec)# TropiCycloneNet
 This project includes a subset of our global TC track and intensity prediction dataset $TCN_{D}$ and the test code of our deep learning TC forecasting method $TCN_{M}$.
 
 The training code will come soon.
@@ -41,13 +41,13 @@ After running the code (about 1 min), you can check the results at **\scripts\pl
 ```
 @article{TropiCycloneNet_under_review,
 author = {Huang, Cheng and Mu, Pan and Zhang, Jinglin and Chan, Sixian and Zhang Shiqi and Yan, Hanting and Chen, Shengyong and Bai, Cong},
-title = {TropiCycloneNet: A Benchmark Dataset and A Deep Learning Method for Global Tropical Cyclone Forecasting},
+title = {Benchmark Dataset and Deep Learning Method for Global Tropical Cyclone Forecasting},
 journal = {Nature Communications},
-volume = {under_review},
-number = {under_review},
-pages = {under_review},
-doi = {under_review},
-url = {under_review},
-year = {under_review}
+volume = {Accepted},
+number = {Accepted},
+pages = {Accepted},
+doi = {Accepted},
+url = {Accepted},
+year = {Accepted}
 }
 ```
