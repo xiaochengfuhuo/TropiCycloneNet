@@ -40,15 +40,17 @@ After running the code (about 1 min), you can check the results at **\scripts\pl
 ## Citing TropiCycloneNet
 
 ```
-@article{TropiCycloneNet_under_review,
-author = {Huang, Cheng and Mu, Pan and Zhang, Jinglin and Chan, Sixian and Zhang Shiqi and Yan, Hanting and Chen, Shengyong and Bai, Cong},
-title = {Benchmark Dataset and Deep Learning Method for Global Tropical Cyclone Forecasting},
-journal = {Nature Communications},
-volume = {Accepted},
-number = {Accepted},
-pages = {Accepted},
-doi = {Accepted},
-url = {Accepted},
-year = {Accepted}
+@article{Huang2025,
+  author    = {Huang, Cheng and Mu, Pan and Zhang, Jinglin and Chan, Sixian and Zhang, Shiqi and Yan, Hanting and Chen, Shengyong and Bai, Cong},
+  title     = {Benchmark dataset and deep learning method for global tropical cyclone forecasting},
+  journal   = {Nature Communications},
+  volume    = {16},
+  number    = {1},
+  pages     = {5923},
+  year      = {2025},
+  publisher = {Nature Publishing Group},
+  doi       = {10.1038/s41467-025-61087-4},
+  url       = {https://doi.org/10.1038/s41467-025-61087-4},
+  issn      = {2041-1723}
 }
 ```
