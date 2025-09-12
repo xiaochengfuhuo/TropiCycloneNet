@@ -1,0 +1,399 @@
+[INFO: train_github.py:  199]: Initializing train dataset
+[INFO: train_github.py:  201]: Initializing val dataset
+[INFO: train_github.py:  209]: There are 3508.75 iterations per epoch
+[INFO: train_github.py:  233]: Here is the generator:
+[INFO: train_github.py:  234]: TrajectoryGenerator(
+  (Unet): Unet3D(
+    (inc): Conv3d(
+      (conv1): Sequential(
+        (0): Conv3d(1, 16, kernel_size=(3, 3, 3), stride=(1, 1, 1), padding=(1, 1, 1))
+        (1): BatchNorm3d(16, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU(inplace=True)
+      )
+      (conv2): Sequential(
+        (0): Conv3d(16, 16, kernel_size=(3, 3, 3), stride=(1, 1, 1), padding=(1, 1, 1))
+        (1): BatchNorm3d(16, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU(inplace=True)
+      )
+      (residual): Conv3d(1, 16, kernel_size=(1, 1, 1), stride=(1, 1, 1), bias=False)
+    )
+    (down1): Down(
+      (maxpool_conv): Sequential(
+        (0): MaxPool3d(kernel_size=[1, 2, 2], stride=[1, 2, 2], padding=0, dilation=1, ceil_mode=False)
+        (1): Conv3d(
+          (conv1): Sequential(
+            (0): Conv3d(16, 32, kernel_size=(3, 3, 3), stride=(1, 1, 1), padding=(1, 1, 1))
+            (1): BatchNorm3d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (2): ReLU(inplace=True)
+          )
+          (conv2): Sequential(
+            (0): Conv3d(32, 32, kernel_size=(3, 3, 3), stride=(1, 1, 1), padding=(1, 1, 1))
+            (1): BatchNorm3d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (2): ReLU(inplace=True)
+          )
+          (residual): Conv3d(16, 32, kernel_size=(1, 1, 1), stride=(1, 1, 1), bias=False)
+        )
+      )
+    )
+    (down2): Down(
+      (maxpool_conv): Sequential(
+        (0): MaxPool3d(kernel_size=[1, 2, 2], stride=[1, 2, 2], padding=0, dilation=1, ceil_mode=False)
+        (1): Conv3d(
+          (conv1): Sequential(
+            (0): Conv3d(32, 64, kernel_size=(3, 3, 3), stride=(1, 1, 1), padding=(1, 1, 1))
+            (1): BatchNorm3d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (2): ReLU(inplace=True)
+          )
+          (conv2): Sequential(
+            (0): Conv3d(64, 64, kernel_size=(3, 3, 3), stride=(1, 1, 1), padding=(1, 1, 1))
+            (1): BatchNorm3d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (2): ReLU(inplace=True)
+          )
+          (residual): Conv3d(32, 64, kernel_size=(1, 1, 1), stride=(1, 1, 1), bias=False)
+        )
+      )
+    )
+    (down3): Down(
+      (maxpool_conv): Sequential(
+        (0): MaxPool3d(kernel_size=[2, 2, 2], stride=[2, 2, 2], padding=0, dilation=1, ceil_mode=False)
+        (1): Conv3d(
+          (conv1): Sequential(
+            (0): Conv3d(64, 128, kernel_size=(3, 3, 3), stride=(1, 1, 1), padding=(1, 1, 1))
+            (1): BatchNorm3d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (2): ReLU(inplace=True)
+          )
+          (conv2): Sequential(
+            (0): Conv3d(128, 128, kernel_size=(3, 3, 3), stride=(1, 1, 1), padding=(1, 1, 1))
+            (1): BatchNorm3d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (2): ReLU(inplace=True)
+          )
+          (residual): Conv3d(64, 128, kernel_size=(1, 1, 1), stride=(1, 1, 1), bias=False)
+        )
+      )
+    )
+    (down4): Down(
+      (maxpool_conv): Sequential(
+        (0): MaxPool3d(kernel_size=[2, 2, 2], stride=[2, 2, 2], padding=0, dilation=1, ceil_mode=False)
+        (1): Conv3d(
+          (conv1): Sequential(
+            (0): Conv3d(128, 128, kernel_size=(3, 3, 3), stride=(1, 1, 1), padding=(1, 1, 1))
+            (1): BatchNorm3d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (2): ReLU(inplace=True)
+          )
+          (conv2): Sequential(
+            (0): Conv3d(128, 128, kernel_size=(3, 3, 3), stride=(1, 1, 1), padding=(1, 1, 1))
+            (1): BatchNorm3d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+            (2): ReLU(inplace=True)
+          )
+          (residual): Conv3d(128, 128, kernel_size=(1, 1, 1), stride=(1, 1, 1), bias=False)
+        )
+      )
+    )
+    (up1): Up(
+      (up): Sequential(
+        (0): ConvTranspose3d(128, 128, kernel_size=(2, 2, 2), stride=(2, 2, 2))
+        (1): ReLU()
+      )
+      (conv): Conv3d(
+        (conv1): Sequential(
+          (0): Conv3d(256, 64, kernel_size=(3, 3, 3), stride=(1, 1, 1), padding=(1, 1, 1))
+          (1): BatchNorm3d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (2): ReLU(inplace=True)
+        )
+        (conv2): Sequential(
+          (0): Conv3d(64, 64, kernel_size=(3, 3, 3), stride=(1, 1, 1), padding=(1, 1, 1))
+          (1): BatchNorm3d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (2): ReLU(inplace=True)
+        )
+        (residual): Conv3d(256, 64, kernel_size=(1, 1, 1), stride=(1, 1, 1), bias=False)
+      )
+    )
+    (up2): Up(
+      (up): Sequential(
+        (0): ConvTranspose3d(64, 64, kernel_size=(2, 2, 2), stride=(2, 2, 2))
+        (1): ReLU()
+      )
+      (conv): Conv3d(
+        (conv1): Sequential(
+          (0): Conv3d(128, 32, kernel_size=(3, 3, 3), stride=(1, 1, 1), padding=(1, 1, 1))
+          (1): BatchNorm3d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (2): ReLU(inplace=True)
+        )
+        (conv2): Sequential(
+          (0): Conv3d(32, 32, kernel_size=(3, 3, 3), stride=(1, 1, 1), padding=(1, 1, 1))
+          (1): BatchNorm3d(32, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (2): ReLU(inplace=True)
+        )
+        (residual): Conv3d(128, 32, kernel_size=(1, 1, 1), stride=(1, 1, 1), bias=False)
+      )
+    )
+    (up3): Up(
+      (up): Sequential(
+        (0): ConvTranspose3d(32, 32, kernel_size=(1, 2, 2), stride=(1, 2, 2))
+        (1): ReLU()
+      )
+      (conv): Conv3d(
+        (conv1): Sequential(
+          (0): Conv3d(64, 16, kernel_size=(3, 3, 3), stride=(1, 1, 1), padding=(1, 1, 1))
+          (1): BatchNorm3d(16, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (2): ReLU(inplace=True)
+        )
+        (conv2): Sequential(
+          (0): Conv3d(16, 16, kernel_size=(3, 3, 3), stride=(1, 1, 1), padding=(1, 1, 1))
+          (1): BatchNorm3d(16, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (2): ReLU(inplace=True)
+        )
+        (residual): Conv3d(64, 16, kernel_size=(1, 1, 1), stride=(1, 1, 1), bias=False)
+      )
+    )
+    (up4): Up(
+      (up): Sequential(
+        (0): ConvTranspose3d(16, 16, kernel_size=(1, 2, 2), stride=(1, 2, 2))
+        (1): ReLU()
+      )
+      (conv): Conv3d(
+        (conv1): Sequential(
+          (0): Conv3d(32, 16, kernel_size=(3, 3, 3), stride=(1, 1, 1), padding=(1, 1, 1))
+          (1): BatchNorm3d(16, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (2): ReLU(inplace=True)
+        )
+        (conv2): Sequential(
+          (0): Conv3d(16, 16, kernel_size=(3, 3, 3), stride=(1, 1, 1), padding=(1, 1, 1))
+          (1): BatchNorm3d(16, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (2): ReLU(inplace=True)
+        )
+        (residual): Conv3d(32, 16, kernel_size=(1, 1, 1), stride=(1, 1, 1), bias=False)
+      )
+    )
+    (outc): OutConv(
+      (up_list): ModuleList(
+        (0): Sequential(
+          (0): ConvTranspose3d(64, 64, kernel_size=(1, 8, 8), stride=(1, 8, 8))
+          (1): ReLU()
+          (2): Conv3d(64, 16, kernel_size=(3, 3, 3), stride=(1, 1, 1), padding=(1, 1, 1))
+          (3): BatchNorm3d(16, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (4): ReLU(inplace=True)
+        )
+        (1): Sequential(
+          (0): ConvTranspose3d(32, 32, kernel_size=(1, 4, 4), stride=(1, 4, 4))
+          (1): ReLU()
+          (2): Conv3d(32, 16, kernel_size=(3, 3, 3), stride=(1, 1, 1), padding=(1, 1, 1))
+          (3): BatchNorm3d(16, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (4): ReLU(inplace=True)
+        )
+        (2): Sequential(
+          (0): ConvTranspose3d(16, 16, kernel_size=(1, 2, 2), stride=(1, 2, 2))
+          (1): ReLU()
+          (2): Conv3d(16, 16, kernel_size=(3, 3, 3), stride=(1, 1, 1), padding=(1, 1, 1))
+          (3): BatchNorm3d(16, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+          (4): ReLU(inplace=True)
+        )
+      )
+      (conv): Sequential(
+        (0): Conv3d(16, 1, kernel_size=(18, 1, 1), stride=(1, 1, 1))
+        (1): BatchNorm3d(1, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (2): ReLU()
+        (3): Conv3d(1, 1, kernel_size=(1, 1, 1), stride=(1, 1, 1))
+      )
+    )
+  )
+  (img_embedding): Linear(in_features=4096, out_features=32, bias=True)
+  (img_embedding_real): Linear(in_features=4096, out_features=32, bias=True)
+  (env_net): Env_net(
+    (data_embed): ModuleDict(
+      (wind): Linear(in_features=1, out_features=16, bias=True)
+      (intensity_class): Linear(in_features=6, out_features=16, bias=True)
+      (move_velocity): Linear(in_features=1, out_features=16, bias=True)
+      (month): Linear(in_features=12, out_features=16, bias=True)
+      (location_long): Linear(in_features=36, out_features=16, bias=True)
+      (location_lat): Linear(in_features=12, out_features=16, bias=True)
+      (history_direction12): Linear(in_features=8, out_features=16, bias=True)
+      (history_direction24): Linear(in_features=8, out_features=16, bias=True)
+      (history_inte_change24): Linear(in_features=4, out_features=16, bias=True)
+    )
+    (GPH_embed): Sequential(
+      (0): Conv2d(1, 1, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): BatchNorm2d(1, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (2): LeakyReLU(negative_slope=0.01, inplace=True)
+      (3): AvgPool2d(kernel_size=8, stride=8, padding=0)
+    )
+    (evn_extract): Sequential(
+      (0): Linear(in_features=208, out_features=104, bias=True)
+      (1): ReLU()
+      (2): Linear(in_features=104, out_features=104, bias=True)
+      (3): ReLU()
+      (4): Linear(in_features=104, out_features=64, bias=True)
+    )
+    (encoder): TransformerEncoder(
+      (layers): ModuleList(
+        (0): TransformerEncoderLayer(
+          (self_attn): MultiheadAttention(
+            (out_proj): NonDynamicallyQuantizableLinear(in_features=64, out_features=64, bias=True)
+          )
+          (linear1): Linear(in_features=64, out_features=2048, bias=True)
+          (dropout): Dropout(p=0.1, inplace=False)
+          (linear2): Linear(in_features=2048, out_features=64, bias=True)
+          (norm1): LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+          (norm2): LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+          (dropout1): Dropout(p=0.1, inplace=False)
+          (dropout2): Dropout(p=0.1, inplace=False)
+        )
+        (1): TransformerEncoderLayer(
+          (self_attn): MultiheadAttention(
+            (out_proj): NonDynamicallyQuantizableLinear(in_features=64, out_features=64, bias=True)
+          )
+          (linear1): Linear(in_features=64, out_features=2048, bias=True)
+          (dropout): Dropout(p=0.1, inplace=False)
+          (linear2): Linear(in_features=2048, out_features=64, bias=True)
+          (norm1): LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+          (norm2): LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+          (dropout1): Dropout(p=0.1, inplace=False)
+          (dropout2): Dropout(p=0.1, inplace=False)
+        )
+      )
+    )
+  )
+  (env_net_chooser): Env_net(
+    (data_embed): ModuleDict(
+      (wind): Linear(in_features=1, out_features=16, bias=True)
+      (intensity_class): Linear(in_features=6, out_features=16, bias=True)
+      (move_velocity): Linear(in_features=1, out_features=16, bias=True)
+      (month): Linear(in_features=12, out_features=16, bias=True)
+      (location_long): Linear(in_features=36, out_features=16, bias=True)
+      (location_lat): Linear(in_features=12, out_features=16, bias=True)
+      (history_direction12): Linear(in_features=8, out_features=16, bias=True)
+      (history_direction24): Linear(in_features=8, out_features=16, bias=True)
+      (history_inte_change24): Linear(in_features=4, out_features=16, bias=True)
+    )
+    (GPH_embed): Sequential(
+      (0): Conv2d(1, 1, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): BatchNorm2d(1, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (2): LeakyReLU(negative_slope=0.01, inplace=True)
+      (3): AvgPool2d(kernel_size=8, stride=8, padding=0)
+    )
+    (evn_extract): Sequential(
+      (0): Linear(in_features=208, out_features=104, bias=True)
+      (1): ReLU()
+      (2): Linear(in_features=104, out_features=104, bias=True)
+      (3): ReLU()
+      (4): Linear(in_features=104, out_features=64, bias=True)
+    )
+    (encoder): TransformerEncoder(
+      (layers): ModuleList(
+        (0): TransformerEncoderLayer(
+          (self_attn): MultiheadAttention(
+            (out_proj): NonDynamicallyQuantizableLinear(in_features=64, out_features=64, bias=True)
+          )
+          (linear1): Linear(in_features=64, out_features=2048, bias=True)
+          (dropout): Dropout(p=0.1, inplace=False)
+          (linear2): Linear(in_features=2048, out_features=64, bias=True)
+          (norm1): LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+          (norm2): LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+          (dropout1): Dropout(p=0.1, inplace=False)
+          (dropout2): Dropout(p=0.1, inplace=False)
+        )
+        (1): TransformerEncoderLayer(
+          (self_attn): MultiheadAttention(
+            (out_proj): NonDynamicallyQuantizableLinear(in_features=64, out_features=64, bias=True)
+          )
+          (linear1): Linear(in_features=64, out_features=2048, bias=True)
+          (dropout): Dropout(p=0.1, inplace=False)
+          (linear2): Linear(in_features=2048, out_features=64, bias=True)
+          (norm1): LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+          (norm2): LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+          (dropout1): Dropout(p=0.1, inplace=False)
+          (dropout2): Dropout(p=0.1, inplace=False)
+        )
+      )
+    )
+  )
+  (feature2dech_env): Linear(in_features=128, out_features=64, bias=True)
+  (feature2dech): Linear(in_features=128, out_features=64, bias=True)
+  (encoder): Encoder(
+    (encoder): LSTM(32, 64)
+    (spatial_embedding): Linear(in_features=4, out_features=32, bias=True)
+    (time_embedding): Linear(in_features=4, out_features=32, bias=True)
+  )
+  (encoder_env): Encoder(
+    (encoder): LSTM(32, 64)
+    (spatial_embedding): Linear(in_features=4, out_features=32, bias=True)
+    (time_embedding): Linear(in_features=4, out_features=32, bias=True)
+  )
+  (gs): ModuleList(
+    (0): Decoder(
+      (decoder): LSTM(32, 64)
+      (spatial_embedding): Linear(in_features=4, out_features=32, bias=True)
+      (time_embedding): Linear(in_features=4, out_features=32, bias=True)
+      (hidden2pos): Linear(in_features=64, out_features=4, bias=True)
+    )
+    (1): Decoder(
+      (decoder): LSTM(32, 64)
+      (spatial_embedding): Linear(in_features=4, out_features=32, bias=True)
+      (time_embedding): Linear(in_features=4, out_features=32, bias=True)
+      (hidden2pos): Linear(in_features=64, out_features=4, bias=True)
+    )
+    (2): Decoder(
+      (decoder): LSTM(32, 64)
+      (spatial_embedding): Linear(in_features=4, out_features=32, bias=True)
+      (time_embedding): Linear(in_features=4, out_features=32, bias=True)
+      (hidden2pos): Linear(in_features=64, out_features=4, bias=True)
+    )
+    (3): Decoder(
+      (decoder): LSTM(32, 64)
+      (spatial_embedding): Linear(in_features=4, out_features=32, bias=True)
+      (time_embedding): Linear(in_features=4, out_features=32, bias=True)
+      (hidden2pos): Linear(in_features=64, out_features=4, bias=True)
+    )
+    (4): Decoder(
+      (decoder): LSTM(32, 64)
+      (spatial_embedding): Linear(in_features=4, out_features=32, bias=True)
+      (time_embedding): Linear(in_features=4, out_features=32, bias=True)
+      (hidden2pos): Linear(in_features=64, out_features=4, bias=True)
+    )
+    (5): Decoder(
+      (decoder): LSTM(32, 64)
+      (spatial_embedding): Linear(in_features=4, out_features=32, bias=True)
+      (time_embedding): Linear(in_features=4, out_features=32, bias=True)
+      (hidden2pos): Linear(in_features=64, out_features=4, bias=True)
+    )
+  )
+  (net_chooser): Sequential(
+    (0): Linear(in_features=64, out_features=32, bias=True)
+    (1): ReLU()
+    (2): Linear(in_features=32, out_features=32, bias=True)
+    (3): ReLU()
+    (4): Linear(in_features=32, out_features=6, bias=True)
+  )
+  (mlp_decoder_context): Sequential(
+    (0): Linear(in_features=64, out_features=128, bias=True)
+    (1): ReLU()
+    (2): Linear(in_features=128, out_features=48, bias=True)
+    (3): ReLU()
+  )
+)
+[INFO: train_github.py:  249]: Here is the discriminator:
+[INFO: train_github.py:  250]: TrajectoryDiscriminator(
+  (img_embedding): Linear(in_features=4096, out_features=32, bias=True)
+  (encoder): Encoder(
+    (encoder): LSTM(32, 128)
+    (spatial_embedding): Linear(in_features=4, out_features=32, bias=True)
+    (time_embedding): Linear(in_features=4, out_features=32, bias=True)
+  )
+  (real_classifier): Sequential(
+    (0): Linear(in_features=128, out_features=128, bias=True)
+    (1): ReLU()
+    (2): Linear(in_features=128, out_features=1, bias=True)
+    (3): ReLU()
+  )
+)
+[INFO: train_github.py:  334]: Starting epoch 1,lr 0.0001
+[INFO: train_github.py:  373]: t = 1 / 354383
+[INFO: train_github.py:  388]:   [G] train_net_chooser_loss: 1.880
+[INFO: train_github.py:  373]: t = 6 / 354383
+[INFO: train_github.py:  388]:   [G] train_net_chooser_loss: 1.737
+[INFO: train_github.py:  373]: t = 11 / 354383
+[INFO: train_github.py:  388]:   [G] train_net_chooser_loss: 1.779
+[INFO: train_github.py:  373]: t = 16 / 354383
+[INFO: train_github.py:  388]:   [G] train_net_chooser_loss: 1.724
+[INFO: train_github.py:  373]: t = 21 / 354383
+[INFO: train_github.py:  388]:   [G] train_net_chooser_loss: 1.732
