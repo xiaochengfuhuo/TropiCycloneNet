@@ -2,7 +2,7 @@
 ![图片](https://github.com/user-attachments/assets/792867ad-5ea4-49c8-beb9-267276de7aec)
 This project includes a subset of our global TC track and intensity prediction dataset $TCN_{D}$ and the test code of our deep learning TC forecasting method $TCN_{M}$.
 
-The training code will come soon.
+**The training code is released now**
 
 ## Introduction
 
@@ -36,6 +36,24 @@ python visual_evaluate_model_Me.py --TC_name MALIKSI --TC_date 2018061006  --TC_
 **TC_name** and **TC_date** are the parameters presenting the TC you want to predict. You can change it and see some other predictions. Please check the TC in the folder **Himawari_airmass** and choose the TC to predict (at this moment, we just provided cloud images in the year 2018 and 2019).
 
 After running the code (about 1 min), you can check the results at **\scripts\plot**
+
+## Training
+
+First, download the [TCND dataset](https://zenodo.org/records/17104690), which has already been preprocessed and is ready for training. Then, extract the `Data_1d`, `Data_3d`, and `Env-Data` folders into their respective directories.
+
+Next, update the following file paths in the code:
+
+* In `scripts/train_github.py`, modify line 36 to point to the path of `Data_1d`.
+* In `TCNM/data/trajectoriesWithMe_unet_training.py`, modify line 379 to point to the path of `Data_3d`, and line 334 to point to the path of `Env-Data`.
+
+Once that's done, run the command below to start training:
+
+```bash
+## model training ##
+cd scripts
+python train_github.py
+```
+
 
 ## Citing TropiCycloneNet
 
