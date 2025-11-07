@@ -26,11 +26,11 @@ test_year = '2023'
 #         [2.5818, 1.4840],
 #         [3.1927, 1.8151]])
 parser = argparse.ArgumentParser()
-parser.add_argument('--model_path',default='model_save/525_b96newwpenv15_all_envtransformer_weight_gphsplit_pipre1lr1e4_bst_divi10_train_val_test_inlcude15_gph', type=str)
+parser.add_argument('--model_path',default='model_save/model_name', type=str)
 parser.add_argument('--num_samples', default=6, type=int)
 parser.add_argument('--dset_type', default='test', type=str)
 parser.add_argument('--areas', default=areas, type=str)
-parser.add_argument('--TC_data_path', default=r'G:\data\all_area_bst\bst_divi10_train_val_test_inlcude15_2023', type=str)
+parser.add_argument('--TC_data_path', default=r'path\bst_divi10_train_val_test_inlcude15_2023', type=str)
 
 
 def get_generator(checkpoint):
